@@ -1,4 +1,4 @@
-package com.aws.codestar.projecttemplates.controller;
+package com.thefallenbrain.stayfithub.services.controller;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterAll;
@@ -7,6 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import com.thefallenbrain.stayfithub.services.controller.HelloWorldController;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
