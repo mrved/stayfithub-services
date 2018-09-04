@@ -1,5 +1,6 @@
 package com.thefallenbrain.stayfithub.services.controller;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -8,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.thefallenbrain.stayfithub.services.controller.HelloWorldController;
+import com.thefallenbrain.stayfithub.services.controller.HomeController;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,12 +17,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Tests for {@link HelloWorldController}. Modify the tests in order to support your use case as you build your project.
  */
 @DisplayName("Tests for HelloWorldController")
-public class HelloWorldControllerTest {
+public class HomeControllerTest {
 
     private static final String EXPECTED_RESPONSE_VALUE = "Hello AWS CodeStar!";
     private static final String INPUT_NAME = "AWS CodeStar";
 
-    private final HelloWorldController controller = new HelloWorldController();
+    private final HomeController controller = new HomeController();
 
     /**
      * Initializing variables before we run the tests.
@@ -45,10 +46,11 @@ public class HelloWorldControllerTest {
 
     /**
      * Basic test to verify the result obtained when calling {@link HelloWorldController#helloWorldGet} successfully.
+     * @throws JSONException 
      */
     @Test
     @DisplayName("Basic test for GET request")
-    void testGetRequest() {
+    void testGetRequest() throws JSONException {
         ResponseEntity responseEntity = controller.helloWorldGet(INPUT_NAME);
 
         // Verify the response obtained matches the values we expect.
@@ -59,10 +61,11 @@ public class HelloWorldControllerTest {
 
     /**
      * Basic test to verify the result obtained when calling {@link HelloWorldController#helloWorldPost} successfully.
+     * @throws JSONException 
      */
     @Test
     @DisplayName("Basic test for POST request")
-    void testPostRequest() {
+    void testPostRequest() throws JSONException {
         ResponseEntity responseEntity = controller.helloWorldPost(INPUT_NAME);
 
         // Verify the response obtained matches the values we expect.
