@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Component
+@CrossOrigin
 public class ApplicationFormController {
     @Autowired
     ApplicationFormRepository applicationFormRepository;

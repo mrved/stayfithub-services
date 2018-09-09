@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Component
+@CrossOrigin
 public class HubFormController {
     @Autowired
     HubFormRepository hubFormRepository;
