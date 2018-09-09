@@ -140,7 +140,7 @@
                         <showDeprecation>true</showDeprecation>
                         <compilerArguments>
                             <processor>
-                                org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor,lombok.launch.AnnotationProcessorHider$AnnotationProcessor
+                                lombok.launch.AnnotationProcessorHider$AnnotationProcessor
                             </processor>
                         </compilerArguments>
                     </configuration>
