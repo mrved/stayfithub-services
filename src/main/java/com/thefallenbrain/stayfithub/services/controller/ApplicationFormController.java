@@ -5,6 +5,7 @@ import com.thefallenbrain.stayfithub.services.domain.ApplicationForm;
 import com.thefallenbrain.stayfithub.services.repository.ApplicationFormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class ApplicationFormController {
     @Autowired
     ApplicationFormRepository applicationFormRepository;
-    @PostMapping("/application")
+    @PostMapping(value = "/application", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     HttpStatus createForm(@RequestBody ApplicationForm applicationForm){
         System.out.println(applicationForm);
        applicationFormRepository.save(applicationForm);
