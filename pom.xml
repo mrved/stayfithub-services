@@ -76,6 +76,21 @@
             <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>
@@ -89,6 +104,7 @@
                         <warSourceDirectory>src/main/webapp</warSourceDirectory>
                         <warName>ROOT</warName>
                         <failOnMissingWebXml>false</failOnMissingWebXml>
+
                     </configuration>
                 </plugin>
                 <plugin>
@@ -111,6 +127,23 @@
                             <version>${junit.jupiter.version}</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.7.0</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <!-- <compilerArgument>-Xlint:all</compilerArgument> -->
+                        <showWarnings>true</showWarnings>
+                        <showDeprecation>true</showDeprecation>
+                        <compilerArguments>
+                            <processor>
+                                org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor,lombok.launch.AnnotationProcessorHider$AnnotationProcessor
+                            </processor>
+                        </compilerArguments>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
