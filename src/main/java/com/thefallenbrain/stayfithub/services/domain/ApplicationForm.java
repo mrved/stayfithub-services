@@ -15,7 +15,7 @@ public class ApplicationForm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    Integer id;
 
     String firstName;
     String lastName;

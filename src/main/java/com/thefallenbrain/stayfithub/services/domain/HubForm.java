@@ -12,7 +12,7 @@ public class HubForm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    Integer id;
 
     String name;
 

@@ -4,23 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
 @Getter
 @Setter
-public class Member extends EndUser{
-
-    @OneToOne
-    Goal goal;
-
+public class FrontdeskAdmin extends EndUser{
     @OneToOne
     FitnessCenter fitnessCenter;
-
-    @OneToOne
-    Trainer trainer;
-
-    @OneToOne
-    HeadTrainer headTrainer;
-
 }
