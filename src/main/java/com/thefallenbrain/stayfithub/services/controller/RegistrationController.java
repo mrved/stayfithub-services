@@ -33,6 +33,9 @@ public class RegistrationController {
     @PostMapping(value = "/signup")
     public Member createMember(@RequestBody Member member){
         memberRepository.save(member);
+        if(member.getPassword() == null){
+            member.setPassword("master");
+        }
         return login(member.getEmail(), member.getPassword());
     }
 
