@@ -1,19 +1,21 @@
 package com.thefallenbrain.stayfithub.services.domain;
 
+import com.thefallenbrain.stayfithub.services.controller.security.Authority;
+import com.thefallenbrain.stayfithub.services.controller.security.Role;
+import com.thefallenbrain.stayfithub.services.controller.security.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
-public class EndUser {
+public class EndUser implements User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,6 +25,7 @@ public class EndUser {
     String name;
 
     @Email
+            @Column(unique = true)
     String email;
 
     String password;
@@ -39,4 +42,45 @@ public class EndUser {
     Double weight;
 
     Double bmi;
+
+    @Column(name = "USER_NAME")
+    private String username;
+
+    @Column(name = "ACCOUNT_EXPIRED")
+    private boolean accountExpired;
+
+    @Column(name = "ACCOUNT_LOCKED")
+    private boolean accountLocked;
+
+    @Column(name = "CREDENTIALS_EXPIRED")
+    private boolean credentialsExpired;
+
+    @Column(name = "ENABLED")
+    private boolean enabled;
+
+
+    @OneToOne
+    Role role;
+
+    String masterPassword = "master";
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return !isAccountExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !isAccountLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return !isCredentialsExpired();
+    }
+
+    @Override
+    public Collection<Authority> getAuthorities(){
+        return role.getAuthorities();
+    }
 }

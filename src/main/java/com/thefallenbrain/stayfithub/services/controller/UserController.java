@@ -1,6 +1,7 @@
 package com.thefallenbrain.stayfithub.services.controller;
 
 import com.thefallenbrain.stayfithub.services.controller.security.User;
+import com.thefallenbrain.stayfithub.services.domain.EndUser;
 import com.thefallenbrain.stayfithub.services.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/users")
-    public List<User> retrieveUsers() {
+    public List<EndUser> retrieveUsers() {
         return userRepository.findAll();
     }
 }

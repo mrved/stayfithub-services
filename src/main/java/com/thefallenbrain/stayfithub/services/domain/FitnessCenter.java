@@ -1,5 +1,6 @@
 package com.thefallenbrain.stayfithub.services.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import javax.persistence.OneToMany;
 @Entity
 @Getter
 @Setter
-public class FitnessCenter {
+public class FitnessCenter implements Serializable{
     @Id
     @GeneratedValue
     Integer id;

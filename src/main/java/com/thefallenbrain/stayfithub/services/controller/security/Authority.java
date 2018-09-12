@@ -15,10 +15,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "AUTHORITY", uniqueConstraints = {@UniqueConstraint(columnNames = {"NAME"})})
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
 public class Authority implements GrantedAuthority {
 
     @Id

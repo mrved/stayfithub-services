@@ -1,5 +1,7 @@
 package com.thefallenbrain.stayfithub.services.bootstrap;
 
+import com.thefallenbrain.stayfithub.services.controller.security.Authority;
+import com.thefallenbrain.stayfithub.services.controller.security.Role;
 import com.thefallenbrain.stayfithub.services.domain.*;
 import com.thefallenbrain.stayfithub.services.repository.*;
 
@@ -10,6 +12,7 @@ import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -35,9 +38,38 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
     @Autowired
     private FrontdeskAdminRepository frontdeskAdminRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        Role adminRole = new Role();
+        adminRole.setRole("ADMIN");
+        Role generalRole = new Role();
+        generalRole.setRole("GENERAL");
+
+        Authority readAuthority = new Authority();
+        readAuthority.setName("READ");
+
+        authorityRepository.save(readAuthority);
+
+        Authority readWriteAuthority = new Authority();
+        readWriteAuthority.setName("READ_WRITE");
+        authorityRepository.save(readWriteAuthority);
+
+        List<Authority> authorities = new ArrayList<>();
+        authorities.add(readAuthority);
+        generalRole.setAuthorities(authorities);
+
+        List<Authority> authorities2 = new ArrayList<>();
+        authorities2.add(readWriteAuthority);
+        adminRole.setAuthorities(authorities2);
+
+        roleRepository.save(adminRole);
+        roleRepository.save(generalRole);
         Goal weightLoss = new Goal();
         weightLoss.setGoalType("Be Healthier");
 
@@ -67,6 +99,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         guru.setName("Guru");
         guru.setDob(new Date());
         guru.setFitnessCenter(frazerTown);
+        guru.setRole(generalRole);
         userRepository.save(guru);
 
         Trainer alan = new Trainer();
@@ -75,7 +108,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         alan.setDoj(new Date());
         alan.setFitnessCenter(frazerTown);
         alan.setHeadTrainer(guru);
-
+        alan.setRole(generalRole);
         userRepository.save(alan);
 
         Trainer rahul = new Trainer();
@@ -84,6 +117,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         rahul.setDoj(new Date());
         rahul.setFitnessCenter(frazerTown);
         rahul.setHeadTrainer(guru);
+        rahul.setRole(generalRole);
         userRepository.save(rahul);
 
         Member arjun = new Member();
@@ -92,13 +126,24 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         arjun.setGoal(weightGain);
         arjun.setFitnessCenter(frazerTown);
         arjun.setTrainer(alan);
+        arjun.setHeadTrainer(guru);
+        arjun.setFitnessCenter(frazerTown);
+        arjun.setRole(generalRole);
+
 
         Member ved = new Member();
         ved.setName("Ved");
+        ved.setUsername("mrvedsachdeva@gmail.com");
+        ved.setEmail("mrvedsachdeva@gmail.com");
+        ved.setPassword("$2a$08$dwYz8O.qtUXboGosJFsS4u19LHKW7aCQ0LXXuNlRfjjGKwj5NfKSe");
         ved.setDob(new Date());
         ved.setGoal(weightLoss);
         ved.setFitnessCenter(frazerTown);
         ved.setTrainer(alan);
+        ved.setHeadTrainer(guru);
+        ved.setFitnessCenter(frazerTown);
+        ved.setRole(generalRole);
+        ved.setEnabled(true);
 
         userRepository.save(ved);
         userRepository.save(arjun);
@@ -121,5 +166,8 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         frontdeskAdmin.setFitnessCenter(frazerTown);
         frontdeskAdmin.setName("Madar Fuchaa");
         frontdeskAdminRepository.save(frontdeskAdmin);
+        frontdeskAdmin.setRole(generalRole);
+
+
     }
 }
